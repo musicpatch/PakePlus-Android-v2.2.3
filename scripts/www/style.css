@@ -23,7 +23,6 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* 头部 */
 .header-row {
     display: flex;
     justify-content: space-between;
@@ -50,7 +49,6 @@ h1 {
     gap: 4px;
 }
 
-/* 每日行 */
 .daily-row {
     background: #eef2f5;
     border-radius: 40px;
@@ -87,7 +85,6 @@ h1 {
     font-weight: 500;
 }
 
-/* 控制栏 */
 .control-row {
     display: flex;
     flex-wrap: wrap;
@@ -104,7 +101,7 @@ h1 {
     padding: 8px 12px;
     font-size: 0.8rem;
 }
-.icon-btn, .outline-btn {
+.outline-btn {
     background: #eef2f5;
     border: none;
     border-radius: 40px;
@@ -136,11 +133,7 @@ h1 {
 .exam-btn {
     background: #e0e7ff;
 }
-.exam-btn.active {
-    background: #2c6e5c;
-}
 
-/* 答题卡片 */
 .quiz-card {
     background: white;
     border-radius: 24px;
@@ -178,7 +171,6 @@ h1 {
     background: #fef3c7;
 }
 
-/* 答案构建区 */
 .answer-area {
     background: #f8fafc;
     border-radius: 28px;
@@ -234,7 +226,6 @@ h1 {
     cursor: pointer;
 }
 
-/* 提交按钮行 */
 .submit-row {
     display: flex;
     gap: 10px;
@@ -264,7 +255,6 @@ h1 {
     font-weight: 500;
 }
 
-/* 模态框紧凑样式 */
 .modal {
     display: none;
     position: fixed;
@@ -327,15 +317,7 @@ h1 {
     align-items: center;
     font-size: 0.8rem;
 }
-.edit-wrong, .delete-wrong {
-    background: #e2e8f0;
-    border: none;
-    border-radius: 30px;
-    padding: 4px 10px;
-    font-size: 0.7rem;
-}
 
-/* 考试弹窗专用 */
 .exam-question {
     background: #f8fafc;
     border-radius: 32px;
@@ -361,9 +343,7 @@ h1 {
     font-size: 0.8rem;
     min-height: 36px;
 }
-.full {
-    width: 100%;
-}
+.full { width: 100%; }
 
 .info-footer {
     text-align: center;
@@ -372,34 +352,9 @@ h1 {
     color: #94a3b8;
 }
 
-/* 小屏适配 */
 @media (max-width: 480px) {
-    .app-container {
-        padding: 12px;
-    }
-    .question-text {
-        font-size: 1.2rem;
-    }
-    .choice-btn {
-        width: 44px;
-        height: 44px;
-        font-size: 1rem;
-    }
-    .current-answer {
-        font-size: 1rem;
-        padding: 8px;
-    }
-    .control-row select, .icon-btn, .outline-btn {
-        padding: 6px 10px;
-    }
-    .mode-btn {
-        padding: 4px 10px;
-    }
-}
-.delete-btn {
-    background-color: #fee2e2;
-    color: #c53030;
-}
-.delete-btn:active {
-    background-color: #fecaca;
+    .app-container { padding: 12px; }
+    .question-text { font-size: 1.2rem; }
+    .choice-btn { width: 44px; height: 44px; font-size: 1rem; }
+    .current-answer { font-size: 1rem; padding: 8px; }
 }

@@ -1,0 +1,59 @@
+# 直系亲属
+father=父亲
+mother=母亲
+parent=父母
+dad=爸爸（口语）
+daddy=爸爸（儿语）
+mom=妈妈（口语）
+mommy=妈妈（儿语）
+son=儿子
+daughter=女儿
+child=孩子
+children=孩子们
+brother=兄弟
+sister=姐妹
+sibling=兄弟姐妹
+grandfather=祖父
+grandmother=祖母
+grandparent=祖父母
+grandpa=爷爷
+grandma=奶奶
+grandson=孙子
+granddaughter=孙女
+grandchild=孙辈
+
+# 旁系亲属
+uncle=叔叔/舅舅/姑父/姨父
+aunt=阿姨/姑妈/舅妈/婶婶
+cousin=表兄妹/堂兄妹
+nephew=侄子/外甥
+niece=侄女/外甥女
+
+
+# 其他亲属
+stepfather=继父
+stepmother=继母
+stepson=继子
+stepdaughter=继女
+stepbrother=继兄弟
+stepsister=继姐妹
+godfather=教父
+godmother=教母
+godson=教子
+goddaughter=教女
+
+# 配偶与伴侣
+husband=丈夫
+wife=妻子
+spouse=配偶
+boyfriend=男朋友
+girlfriend=女朋友
+partner=伴侣
+
+
+# 家庭相关
+family=家庭
+relative=亲戚
+ancestor=祖先
+descendant=后代
+twin=双胞胎

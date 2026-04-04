@@ -1,0 +1,15 @@
+teacher=老师
+student=学生
+doctor=医生
+nurse=护士
+driver=司机
+cook=厨师
+farmer=农民
+worker=工人
+policeman=警察
+singer=歌手
+dancer=舞蹈家
+actor=演员
+artist=画家
+writer=作家
+reporter=记者

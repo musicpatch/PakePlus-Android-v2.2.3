@@ -1,11 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>单词工坊</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header-row">
+            <h1>单词工坊</h1>
+            <div class="score-compact">
+                <span>✅<span id="scoreCount">0</span></span>
+                <span>📊<span id="totalCount">0</span></span>
+            </div>
+        </div>
+
+        <div class="daily-row">
+            <div class="daily-set">
+                <input type="number" id="dailyGoalInput" value="10" min="1" max="100">
+                <button id="setGoalBtn" class="small-btn">设</button>
+            </div>
+            <div class="daily-progress">
+                📅 <strong id="todayDone">0</strong>/<span id="dailyGoalDisplay">10</span>
+            </div>
+            <button id="resetDailyBtn" class="small-btn">重置</button>
+        </div>
+
+        <div class="control-row">
+            <select id="bankSelect"></select>
+            <button id="importBankBtn" class="icon-btn">导入</button>
+            <button id="deleteBankBtn" class="icon-btn delete-btn">🗑</button>
+            <div class="mode-switch">
+                <button data-mode="en2zh" class="mode-btn active">英译汉</button>
+                <button data-mode="zh2en" class="mode-btn">汉译英</button>
+                <button id="examBtn" class="mode-btn exam-btn">考试</button>
+            </div>
+            <button id="wrongBookBtn" class="outline-btn">错题本</button>
+            <button id="exportWrongBtn" class="outline-btn">导出</button>
+        </div>
+
+        <div class="quiz-card">
+            <div class="question-row">
+                <div class="question-text" id="questionText">加载中...</div>
+                <button id="speakBtn" class="speak-btn">🔊</button>
+                <button id="hintBtn" class="hint-btn">💡</button>
+            </div>
+
+            <div class="answer-area">
+                <div class="current-answer" id="currentAnswerDisplay"></div>
+                <div class="button-panel" id="selectionPanel"></div>
+                <div class="answer-actions">
+                    <button id="backspaceBtn" class="action-key">⌫</button>
+                    <button id="clearAllBtn" class="action-key">清空</button>
+                </div>
+            </div>
+
+            <div class="submit-row">
+                <button id="submitBtn" class="primary-btn">提交</button>
+                <button id="nextBtn" class="secondary-btn">下一题</button>
+            </div>
+            <div class="feedback" id="feedbackMsg"></div>
+        </div>
+
+        <div id="wrongModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>📘 错题本 · <span id="currentWrongBankName"></span></span>
+                    <button id="closeModalBtn" class="close-modal">&times;</button>
+                </div>
+                <div id="wrongListContainer" class="wrong-list"></div>
+                <div class="modal-footer">
+                    <button id="clearWrongBtn" class="danger-btn">清空</button>
+                    <button id="practiceWrongBtn" class="primary-btn">练习</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="examModal" class="modal exam-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>📝 考试模式</span>
+                    <button id="closeExamBtn" class="close-modal">&times;</button>
+                </div>
+                <div class="exam-area">
+                    <div class="exam-question" id="examQuestionText"></div>
+                    <div class="exam-progress" id="examProgress"></div>
+                    <div class="exam-answer-area">
+                        <div class="current-answer" id="examCurrentAnswer"></div>
+                        <div class="button-panel" id="examSelectionPanel"></div>
+                        <div class="answer-actions">
+                            <button id="examBackspaceBtn" class="action-key">⌫</button>
+                            <button id="examClearBtn" class="action-key">清空</button>
+                        </div>
+                    </div>
+                    <div class="exam-feedback" id="examFeedback"></div>
+                    <button id="examSubmitBtn" class="primary-btn full">提交</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="info-footer">点选字母拼写答案</footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="exam.js"></script>
+</body>
 </html>

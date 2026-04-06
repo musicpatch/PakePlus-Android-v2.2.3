@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #f1e8d0;
+    font-family: 'Segoe UI', '楷体', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#app {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 主菜单 */
+.main-menu {
+    background: #fff9ef;
+    border-radius: 48px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 30px 20px 40px;
+    text-align: center;
+}
+.logo h1 {
+    font-size: 32px;
+    color: #d4a373;
+    margin-bottom: 8px;
+}
+.sub {
+    color: #b68b54;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.btn {
+    background: #ecd9b4;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: inherit;
+    color: #2c1a0a;
+    cursor: pointer;
+    width: 80%;
+    transition: 0.05s linear;
+    box-shadow: 0 3px 0 #b68b54;
+}
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #b68b54;
+}
+.btn.primary {
+    background: #d4a373;
+    color: white;
+    box-shadow: 0 3px 0 #8b5a2b;
+}
+.chapter-selector {
+    display: flex;
+    gap: 10px;
+    width: 80%;
+    margin-top: 10px;
+}
+#chapterSelect {
+    flex: 2;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 40px;
+    border: 2px solid #d4a373;
+    background: white;
+    font-family: inherit;
+}
+.btn.small {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+}
+.footer-note {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #aa8e66;
+}
+
+/* 游戏界面 (动态生成) */
+.game-container {
+    background: #fff9ef;
+    border-radius: 48px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+.game-header {
+    background: #d4a373;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+.game-header h2 {
+    font-size: 24px;
+}
+.game-header .chapter-title {
+    font-size: 14px;
+    opacity: 0.9;
+}
+.question-area {
+    padding: 30px 20px;
+}
+.question-text {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    color: #3b2a1f;
+    line-height: 1.4;
+    background: #fff0d8;
+    padding: 25px 15px;
+    border-radius: 60px;
+    margin-bottom: 30px;
+}
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.option-btn {
+    background: #f0e0c0;
+    border: none;
+    padding: 16px 12px;
+    border-radius: 100px;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: bold;
+    color: #2c1a0a;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.05s linear;
+    box-shadow: 0 3px 0 #b68b54;
+}
+.option-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #b68b54;
+}
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #ecd9b4;
+    font-size: 14px;
+}
+.game-footer button {
+    background: #b68b54;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 50px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+/* Toast 提示 */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
+    background: #333;
+    color: #ffefc0;
+    padding: 12px;
+    border-radius: 28px;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0;
+    transition: 0.2s;
+    pointer-events: none;
+    z-index: 1000;
+}

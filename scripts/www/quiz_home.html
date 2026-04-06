@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>水浒搞笑问答 · 选章</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: #f1e8d0;
+            font-family: 'Segoe UI', '楷体', 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+        #app {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .main-menu {
+            background: #fff9ef;
+            border-radius: 36px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 20px 12px 28px;
+            text-align: center;
+        }
+        .logo h1 {
+            font-size: 26px;
+            color: #d4a373;
+            margin-bottom: 4px;
+        }
+        .sub {
+            color: #b68b54;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn {
+            background: #ecd9b4;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: inherit;
+            color: #2c1a0a;
+            cursor: pointer;
+            width: 85%;
+            transition: transform 0.05s linear;
+            box-shadow: 0 2px 0 #b68b54;
+        }
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b68b54;
+        }
+        .btn.primary {
+            background: #d4a373;
+            color: white;
+            box-shadow: 0 2px 0 #8b5a2b;
+        }
+.chapter-selector {
+    display: flex;
+    gap: 8px;
+    width: auto;
+    justify-content: center;
+    margin-top: 6px;
+}
+#chapterSelect {
+    flex: 0 0 auto;
+    width: 150px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 40px;
+    border: 2px solid #d4a373;
+    background: white;
+    font-family: inherit;
+}
+        #chapterSelect option:disabled {
+            color: #aaa;
+            background-color: #f0f0f0;
+            font-style: italic;
+        }
+        .btn.small {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #aa8e66;
+        }
+        .new-game-btn {
+            background: #7c9c5e;
+            box-shadow: 0 2px 0 #4a6a3a;
+            color: white;
+        }
+        .game-container {
+            background: #fff9ef;
+            border-radius: 36px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .game-header {
+            background: #d4a373;
+            padding: 14px;
+            text-align: center;
+            color: white;
+        }
+        .game-header h2 {
+            font-size: 18px;
+        }
+        .chapter-title {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        .question-area {
+            padding: 16px 12px;
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #3b2a1f;
+            line-height: 1.4;
+            background: #fff0d8;
+            padding: 16px 10px;
+            border-radius: 36px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .option-btn {
+            background: #f0e0c0;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-family: inherit;
+            font-weight: bold;
+            color: #2c1a0a;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.05s linear;
+            box-shadow: 0 2px 0 #b68b54;
+        }
+        .option-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b68b54;
+        }
+        .game-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: #ecd9b4;
+            font-size: 12px;
+        }
+        .game-footer button {
+            background: #b68b54;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 50px;
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #333;
+            color: #ffefc0;
+            padding: 8px;
+            border-radius: 28px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .error-counter {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: #ffaa00;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 1001;
+            pointer-events: none;
+        }
+        .unlock-tip {
+            font-size: 12px;
+            color: #b68b54;
+            margin-bottom: 6px;
+        }
+        .dev-badge {
+            position: fixed;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.5);
+            color: #ffaa00;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 12px;
+            pointer-events: none;
+            z-index: 1002;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toastMsg"></div>
+<div class="error-counter" id="errorCounter">❌ 错题:0</div>
+<div class="dev-badge" id="devBadge" style="display:none;">🔧 开发模式</div>
+
+<script type="module">
+// ==================== 开发模式检测 ====================
+const isDevMode = localStorage.getItem('shuihu_dev_mode') === 'true';
+if (isDevMode) {
+    document.getElementById('devBadge').style.display = 'block';
+}
+
+// ==================== 解锁系统 ====================
+const UNLOCK_KEY = 'shuihu_unlocked_chapters';
+let unlockedChapters = new Set();
+let allChaptersList = [];
+let allChaptersMap = {};
+
+function loadUnlockData() {
+    const stored = localStorage.getItem(UNLOCK_KEY);
+    if (stored) {
+        try {
+            const arr = JSON.parse(stored);
+            unlockedChapters = new Set(arr);
+        } catch(e) {}
+    }
+    if (!isDevMode) {
+        // 正式模式：默认解锁第一章和第二章（可调整）
+        unlockedChapters.add('chapter_1');
+        unlockedChapters.add('chapter_2');
+    } else {
+        // 开发模式：所有章节会在加载后动态解锁（在 loadAllChapters 中处理）
+    }
+    saveUnlockData();
+}
+
+function saveUnlockData() {
+    const arr = Array.from(unlockedChapters);
+    localStorage.setItem(UNLOCK_KEY, JSON.stringify(arr));
+}
+
+function isChapterUnlocked(chapterId) {
+    if (isDevMode) return true;  // 开发模式全部解锁
+    return unlockedChapters.has(chapterId);
+}
+
+function unlockChapter(chapterId) {
+    if (!unlockedChapters.has(chapterId)) {
+        unlockedChapters.add(chapterId);
+        saveUnlockData();
+        showToast(`🎉 新章节“${getChapterDisplayName(chapterId)}”已解锁！`, 3000);
+        return true;
+    }
+    return false;
+}
+
+function getChapterDisplayName(chapterId) {
+    const ch = allChaptersMap[chapterId];
+    return ch ? ch.title : chapterId;
+}
+
+function tryUnlockNextChapter(currentChapterId) {
+    if (isDevMode) return; // 开发模式不需要解锁
+    const match = currentChapterId.match(/chapter_(\d+)/);
+    if (match) {
+        const currentNum = parseInt(match[1], 10);
+        const nextNum = currentNum + 1;
+        const nextChapterId = `chapter_${nextNum}`;
+        if (allChaptersMap[nextChapterId]) {
+            unlockChapter(nextChapterId);
+            showMainMenu(); // 刷新菜单
+        }
+    }
+}
+
+// ==================== 游戏引擎 ====================
+const STORAGE_KEY = 'shuihu_quiz_save';
+let mainMistakeCount = 0;
+let currentChapter = null;
+let currentNodeId = null;
+let listeners = [];
+let lastMainNodeId = null;
+
+function updateCounterUI() {
+    const el = document.getElementById('errorCounter');
+    if (el) el.textContent = `❌ 错题:${mainMistakeCount}`;
+}
+
+function addMainMistake() {
+    mainMistakeCount++;
+    updateCounterUI();
+}
+
+function resetMistakeCounter() {
+    mainMistakeCount = 0;
+    updateCounterUI();
+}
+
+function saveGame(chapterId, nodeId) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ chapterId, nodeId }));
+}
+function loadGame() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+}
+function clearSave() {
+    localStorage.removeItem(STORAGE_KEY);
+    resetMistakeCounter();
+}
+
+function loadChapter(chapterData, startNodeId = null) {
+    if (!chapterData) return false;
+    currentChapter = chapterData;
+    const startId = startNodeId || chapterData.startNodeId;
+    if (!currentChapter.nodes[startId]) return false;
+    currentNodeId = startId;
+    if (/^m\d+$/.test(currentNodeId)) {
+        lastMainNodeId = currentNodeId;
+    }
+    saveGame(currentChapter.id, currentNodeId);
+    listeners.forEach(fn => fn());
+    return true;
+}
+
+function getCurrentNode() {
+    return currentChapter?.nodes[currentNodeId] || null;
+}
+
+async function loadAllChapters() {
+    allChaptersMap = {};
+    allChaptersList = [];
+    let i = 1;
+    while (true) {
+        try {
+            const mod = await import(`./data/chapter_${i}.js`);
+            const key = `chapter_${i}`;
+            const data = mod[key];
+            if (data) {
+                allChaptersMap[key] = data;
+                i++;
+            } else break;
+        } catch (e) {
+            break;
+        }
+    }
+    // 开发模式：自动解锁所有已加载的章节
+    if (isDevMode) {
+        for (let id of Object.keys(allChaptersMap)) {
+            if (!unlockedChapters.has(id)) {
+                unlockedChapters.add(id);
+            }
+        }
+        saveUnlockData();
+    }
+    // 构建列表
+    for (let [id, data] of Object.entries(allChaptersMap)) {
+        allChaptersList.push({
+            id: id,
+            name: data.title,
+            unlocked: isChapterUnlocked(id)
+        });
+    }
+    allChaptersList.sort((a,b) => {
+        const na = parseInt(a.id.split('_')[1]);
+        const nb = parseInt(b.id.split('_')[1]);
+        return na - nb;
+    });
+}
+
+function startGame(chapterId, startNodeId = null) {
+    const ch = allChaptersMap[chapterId];
+    if (!ch) {
+        alert('章节不存在');
+        return;
+    }
+    if (!isChapterUnlocked(chapterId)) {
+        alert('该章节尚未解锁，请先通关前一章节');
+        return;
+    }
+    resetMistakeCounter();
+    if (loadChapter(ch, startNodeId)) {
+        renderGame();
+    } else {
+        alert('加载章节失败');
+    }
+}
+
+function goToNode(targetId, feedback) {
+    if (targetId.startsWith('chapter_')) {
+        if (!isChapterUnlocked(targetId)) {
+            showToast('该章节尚未解锁，请先通关前一章节');
+            return;
+        }
+        startGame(targetId, null);
+        return;
+    }
+    if (targetId === 'RESTART_GAME') {
+        clearSave();
+        location.reload();
+        return;
+    }
+    if (targetId === 'BACK') {
+        if (lastMainNodeId && currentChapter?.nodes[lastMainNodeId]) {
+            targetId = lastMainNodeId;
+        } else {
+            showToast('无法返回主线');
+            return;
+        }
+    }
+
+    if (mainMistakeCount === 9 && targetId !== 'RESTART_GAME' && !targetId.startsWith('chapter_')) {
+        forceDeath();
+        return;
+    }
+
+    if (/^m\d+$/.test(targetId)) {
+        lastMainNodeId = targetId;
+    }
+
+    const isFromMain = currentNodeId && /^m\d+$/.test(currentNodeId);
+    const isToSide = targetId.startsWith('s');
+    if (isFromMain && isToSide) {
+        addMainMistake();
+    }
+
+    if (!currentChapter || !currentChapter.nodes[targetId]) {
+        showToast('节点异常，请重置');
+        return;
+    }
+
+    if (feedback) showToast(feedback);
+    currentNodeId = targetId;
+    saveGame(currentChapter.id, currentNodeId);
+    listeners.forEach(fn => fn());
+
+    if (targetId === 'complete') {
+        tryUnlockNextChapter(currentChapter.id);
+    }
+}
+
+function forceDeath() {
+    if (currentChapter && currentChapter.nodes['death_entry']) {
+        showToast('⚠️ 累计答错9次，第10次强制进入死亡题！');
+        currentNodeId = 'death_entry';
+        saveGame(currentChapter.id, currentNodeId);
+        listeners.forEach(fn => fn());
+    } else {
+        showToast('章节未配置死亡题，游戏将重置');
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+    mainMistakeCount = 0;
+    updateCounterUI();
+}
+
+function resetChapter() {
+    if (!currentChapter) return;
+    currentNodeId = currentChapter.startNodeId;
+    if (/^m\d+$/.test(currentNodeId)) {
+        lastMainNodeId = currentNodeId;
+    }
+    resetMistakeCounter();
+    saveGame(currentChapter.id, currentNodeId);
+    listeners.forEach(fn => fn());
+    showToast('本章已重置');
+}
+
+function subscribe(fn) { listeners.push(fn); }
+
+function showToast(msg, duration = 2000) {
+    const t = document.getElementById('toastMsg');
+    t.textContent = msg;
+    t.style.opacity = '0.9';
+    setTimeout(() => t.style.opacity = '0', duration);
+}
+
+function renderGame() {
+    const node = getCurrentNode();
+    if (!node || !currentChapter) return;
+    const app = document.getElementById('app');
+    app.innerHTML = `
+    <div class="game-container">
+        <div class="game-header">
+            <h2>${currentChapter.title}</h2>
+            <div class="chapter-title">${node.id}</div>
+        </div>
+        <div class="question-area">
+            <div class="question-text">${node.text}</div>
+            <div class="options" id="optionsContainer"></div>
+        </div>
+        <div class="game-footer">
+            <button id="resetChapterBtn">🔄 重置本章</button>
+            <button id="backMenuBtn">🏠 返回菜单</button>
+        </div>
+    </div>`;
+    const cont = document.getElementById('optionsContainer');
+    node.options.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'option-btn';
+        b.textContent = opt.text;
+        b.onclick = () => {
+            goToNode(opt.target, opt.feedback);
+            renderGame();
+        };
+        cont.appendChild(b);
+    });
+    document.getElementById('resetChapterBtn').onclick = () => {
+        resetChapter();
+        renderGame();
+    };
+    document.getElementById('backMenuBtn').onclick = () => {
+        location.reload();
+    };
+}
+
+async function showMainMenu() {
+    await loadAllChapters();
+    const app = document.getElementById('app');
+    let opts = '';
+    if (allChaptersList.length) {
+        allChaptersList.forEach(ch => {
+            const disabled = !ch.unlocked;
+            const lockSymbol = disabled ? '🔒 ' : '';
+            opts += `<option value="${ch.id}" ${disabled ? 'disabled' : ''} style="${disabled ? 'color:#aaa;' : ''}">${lockSymbol}${ch.name}${disabled ? ' (未解锁)' : ''}</option>`;
+        });
+    } else {
+        opts = '<option>未检测到章节</option>';
+    }
+    const menuHtml = `
+    <div class="main-menu">
+        <div class="logo">
+            <h1>🍺 水浒搞笑问答 🎋</h1>
+            <p class="sub">答对走主线，答错笑哈哈</p>
+        </div>
+        <div class="menu-buttons">
+            <button id="continueBtn" class="btn primary">▶ 继续游戏</button>
+            <button id="newGameBtn" class="btn new-game-btn">✨ 新游戏（清除存档）</button>
+            <div class="unlock-tip">🔓 通关当前章节后，下一章将自动解锁！</div>
+            <div class="chapter-selector">
+                <select id="chapterSelect">${opts}</select>
+                <button id="jumpBtn" class="btn small">📖 直接跳转</button>
+            </div>
+        </div>
+        <div class="footer-note">
+            💡 累计答错9次后，第10次任何操作都将触发死亡题！<br>
+            ✅ 已解锁章节可正常游玩，🔒 灰色为未解锁。
+        </div>
+    </div>`;
+    app.innerHTML = menuHtml;
+
+    document.getElementById('continueBtn').onclick = () => {
+        const saved = loadGame();
+        if (saved && allChaptersMap[saved.chapterId] && isChapterUnlocked(saved.chapterId)) {
+            startGame(saved.chapterId, saved.nodeId);
+        } else {
+            alert('无存档或章节未解锁');
+        }
+    };
+    document.getElementById('newGameBtn').onclick = () => {
+        clearSave();
+        if (allChaptersList.length) {
+            const firstUnlocked = allChaptersList.find(ch => ch.unlocked);
+            if (firstUnlocked) startGame(firstUnlocked.id);
+            else alert('没有可用的已解锁章节');
+        } else {
+            alert('无可用章节');
+        }
+    };
+    document.getElementById('jumpBtn').onclick = () => {
+        const select = document.getElementById('chapterSelect');
+        const val = select.value;
+        if (val && allChaptersMap[val] && isChapterUnlocked(val)) {
+            startGame(val);
+        } else {
+            alert('请选择一个已解锁的章节');
+        }
+    };
+}
+
+subscribe(() => {
+    if (currentChapter) renderGame();
+});
+
+loadUnlockData();
+showMainMenu();
+
+// 控制台提示开发模式开关
+if (!isDevMode) {
+    console.log('💡 提示：输入 localStorage.setItem("shuihu_dev_mode","true"); location.reload(); 可开启开发模式（解锁所有章节）');
+} else {
+    console.log('🔧 开发模式已开启，所有章节自动解锁。关闭请执行：localStorage.removeItem("shuihu_dev_mode"); location.reload();');
+}
+</script>
+</body>
+</html>

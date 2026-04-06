@@ -1,11 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>水浒英雄传</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 额外确保按钮在手机上足够大 */
+        .start-btn {
+            width: 80%;
+            max-width: 300px;
+            padding: 16px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #d4a373;
+            border: none;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: 0.1s linear;
+        }
+        .start-btn:active {
+            transform: scale(0.96);
+        }
+        .start-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .logo-img {
+            max-width: 80%;
+            height: auto;
+        }
+        .main-title {
+            font-size: 28px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="start-page">
+        <div class="logo-box">
+            <img src="./img/logo.jpg" alt="水浒英雄传" class="logo-img">
+        </div>
+        <h1 class="main-title">水浒英雄传</h1>
+        <button id="startBtn" class="start-btn">开始游戏</button>
+    </div>
+
+    <audio id="openMusic" loop preload="auto">
+        <source src="./audio/op/opening.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+const openMusic = document.getElementById("openMusic");
+const startBtn = document.getElementById("startBtn");
+
+document.body.addEventListener("touchstart", playAudio, { once: true });
+document.body.addEventListener("click", playAudio, { once: true });
+
+function playAudio() {
+    openMusic.play().catch(err => {});
+}
+
+startBtn.addEventListener('click', ()=>{
+    location.href = "intro.html";
+});
+</script>
+
+</body>
 </html>
